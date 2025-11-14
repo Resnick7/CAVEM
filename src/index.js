@@ -26,6 +26,14 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors({
+  origin: [
+    'http://localhost:5173', // Vite dev server
+    'http://localhost:3000', // React Router dev server
+    'http://localhost:4173', // Vite preview
+  ],
+  credentials: true
+}));
 
 // Servir archivos estáticos (PDFs)
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));

@@ -23,7 +23,7 @@ const seedData = async () => {
     // Crear usuario administrador
     console.log('👤 Creando usuario administrador...');
     const admin = await User.create({
-      username: 'admin',
+      username: 'Admin',
       email: 'admin@cavem.com',
       password: 'admin123', // Se hasheará automáticamente
       role: 'admin'
@@ -33,78 +33,102 @@ const seedData = async () => {
     console.log('👨‍🏫 Creando profesores...');
     const teachers = await Teacher.create([
       {
-        firstName: 'Carlos',
-        lastName: 'Martínez',
-        email: 'carlos@cavem.com',
+        firstName: 'Norma',
+        lastName: 'Contrera',
+        email: 'necontrera@cavem.com',
         phone: '+54 261 123-4567',
-        bio: 'Especialista en velocidad y saltos con 20 años de experiencia',
-        specialties: ['velocidad', 'saltos', 'vallas'],
+        bio: 'Entrenadora con experiencia en lanzamientos y vallas.',
+        specialties: ['Velocidad', 'Saltos', 'Vallas', 'Jabalina', 'Bala', 'Martillo'],
         experience: 20,
         schedule: [
           {
-            day: 'Lunes',
-            startTime: '18:00',
+            day: 'Martes',
+            startTime: '17:00',
             endTime: '20:00',
-            location: 'Pista Municipal',
-            ageGroup: 'Adultos',
-            discipline: 'Velocidad'
+            location: 'Pista provincial de atletismo  de mendoza',
+            ageGroup: 'Adolescentes y Adultos',
+            discipline: 'Lanzamientos y Pista'
           },
           {
-            day: 'Miércoles',
-            startTime: '18:00',
+            day: 'Jueves',
+            startTime: '17:00',
             endTime: '20:00',
-            location: 'Pista Municipal',
-            ageGroup: 'Adultos',
-            discipline: 'Saltos'
+            location: 'Pista provincial de atletismo  de mendoza',
+            ageGroup: 'Adolescentes y Adultos',
+            discipline: 'Lanzamientos y Pista'
+          },
+          {
+            day: 'Sábado',
+            startTime: '10:00',
+            endTime: '12:00',
+            location: 'Pista provincial de atletismo  de mendoza',
+            ageGroup: 'Adolescentes y Adultos',
+            discipline: 'Lanzamientos y Pista'
           }
         ],
         isActive: true
       },
       {
-        firstName: 'Laura',
-        lastName: 'Fernández',
-        email: 'laura@cavem.com',
+        firstName: 'Monica',
+        lastName: 'Rojas',
+        email: 'mrojas@cavem.com',
         phone: '+54 261 234-5678',
-        bio: 'Entrenadora especializada en fondo y medio fondo',
-        specialties: ['fondo', 'medio fondo', 'maratón'],
+        bio: 'Entrenadora especializada en preparación infantil.',
+        specialties: ['Fondo', 'Medio fondo', 'Maratón', 'Pista', 'Campo'],
         experience: 15,
         schedule: [
           {
             day: 'Martes',
-            startTime: '19:00',
-            endTime: '21:00',
+            startTime: '17:00',
+            endTime: '20:00',
             location: 'Parque General San Martín',
             ageGroup: 'Todos',
             discipline: 'Fondo'
           },
           {
             day: 'Jueves',
-            startTime: '19:00',
-            endTime: '21:00',
+            startTime: '17:00',
+            endTime: '20:00',
             location: 'Parque General San Martín',
             ageGroup: 'Todos',
             discipline: 'Medio Fondo'
+          },
+          {
+            day: 'Sábado',
+            startTime: '10:00',
+            endTime: '12:00',
+            location: 'Pista provincial de atletismo  de mendoza',
+            ageGroup: 'Adolescentes y Adultos',
+            discipline: 'Lanzamientos y Pista'
           }
         ],
         isActive: true
       },
       {
-        firstName: 'Roberto',
-        lastName: 'Gómez',
-        email: 'roberto@cavem.com',
+        firstName: 'Matías',
+        lastName: 'Pscitelli',
+        email: 'mpscitelli@cavem.com',
         phone: '+54 261 345-6789',
-        bio: 'Especialista en lanzamientos y pruebas de campo',
-        specialties: ['lanzamiento de bala', 'disco', 'jabalina'],
+        bio: 'Especialista en saltos y gimnasio.',
+        specialties: ['Largo', 'Alto', 'Triple', 'Garrocha'],
         experience: 18,
         schedule: [
           {
-            day: 'Viernes',
+            day: 'Lunes',
             startTime: '17:00',
             endTime: '19:00',
             location: 'Estadio Malvinas Argentinas',
             ageGroup: 'Juveniles y Adultos',
-            discipline: 'Lanzamientos'
-          }
+            discipline: 'Gimnasio'
+          },
+          {
+            day: 'Miércoles',
+            startTime: '17:00',
+            endTime: '19:00',
+            location: 'Estadio Malvinas Argentinas',
+            ageGroup: 'Juveniles y Adultos',
+            discipline: 'Gimnasio'
+          },
         ],
         isActive: true
       }
@@ -115,13 +139,13 @@ const seedData = async () => {
     const tournaments = await Tournament.create([
       {
         name: 'Campeonato Nacional Master 2025',
-        description: 'XXII Campeonato Sudamericano de Atletismo Master - Participación de CAVEM con atletas destacados',
+        description: 'XXII Campeonato Sudamericano de Atletismo Master',
         category: 'master',
         location: 'Estadio Malvinas Argentinas, Mendoza',
         date: new Date('2025-12-10'),
         endDate: new Date('2025-12-12'),
         registrationDeadline: new Date('2025-11-25'),
-        registrationLink: 'https://forms.google.com/campeonato-nacional',
+        registrationLink: 'https://docs.google.com/forms/d/e/1FAIpQLSdW01ZBxClp3uJt6eiPS_EwCsHHt6Rw6mzzJsKOgqRak6XeKw/viewform?usp=sharing&ouid=111714396674666937246',
         disciplines: ['100m', '200m', '400m', 'salto largo', 'lanzamiento de bala'],
         ageCategories: ['M35', 'M40', 'M45', 'M50', 'M55', 'M60'],
         status: 'próximo',
@@ -140,6 +164,7 @@ const seedData = async () => {
         date: new Date('2025-06-07'),
         endDate: new Date('2025-06-08'),
         registrationDeadline: new Date('2025-05-30'),
+        registrationLink: 'https://docs.google.com/forms/d/e/1FAIpQLSdW01ZBxClp3uJt6eiPS_EwCsHHt6Rw6mzzJsKOgqRak6XeKw/viewform?usp=sharing&ouid=111714396674666937246',
         disciplines: ['largo', 'triple salto'],
         ageCategories: ['U14', 'U16', 'U18', 'U20'],
         status: 'finalizado',
@@ -153,6 +178,7 @@ const seedData = async () => {
         location: 'Velódromo de Mendoza',
         date: new Date('2026-03-15'),
         registrationDeadline: new Date('2026-03-01'),
+        registrationLink: 'https://docs.google.com/forms/d/e/1FAIpQLSdW01ZBxClp3uJt6eiPS_EwCsHHt6Rw6mzzJsKOgqRak6XeKw/viewform?usp=sharing&ouid=111714396674666937246',
         disciplines: ['100m', '200m', '800m', '1500m'],
         ageCategories: ['M35', 'M40', 'M45', 'M50'],
         status: 'próximo',
@@ -168,7 +194,7 @@ const seedData = async () => {
         content: 'El Círculo de Atletas Veteranos de Mendoza participará activamente en el XXII Campeonato Sudamericano de Atletismo Master que se realizará en el Estadio Malvinas Argentinas. Contamos con una delegación de 15 atletas que competirán en diversas disciplinas.',
         excerpt: 'CAVEM participará con 15 atletas en el campeonato sudamericano',
         category: 'torneo',
-        tags: ['campeonato', 'master', 'mendoza'],
+        tags: ['Campeonato', 'Master', 'Mendoza'],
         author: admin._id,
         isPublished: true,
         views: 42
@@ -178,7 +204,7 @@ const seedData = async () => {
         content: 'Nuestros atletas obtuvieron excelentes resultados en el Torneo de Combinadas realizado en junio. Destacamos las actuaciones en largo y triple salto de las categorías juveniles.',
         excerpt: 'Excelentes resultados de CAVEM en el torneo de junio',
         category: 'logro',
-        tags: ['torneo', 'resultados', 'juveniles'],
+        tags: ['Torneo', 'Resultados', 'Juveniles'],
         author: admin._id,
         isPublished: true,
         views: 38
@@ -188,7 +214,7 @@ const seedData = async () => {
         content: 'Ya están abiertas las inscripciones para las clases de atletismo del ciclo 2026. Contamos con horarios para todas las edades, desde niños de 4 años hasta adultos mayores. Consultar horarios con nuestros profesores.',
         excerpt: 'Inscripciones abiertas para el ciclo 2026',
         category: 'anuncio',
-        tags: ['inscripciones', 'clases', '2026'],
+        tags: ['Inscripciones', 'Clases', '2026'],
         author: admin._id,
         isPublished: true,
         views: 67
@@ -198,7 +224,7 @@ const seedData = async () => {
         content: 'A partir del mes próximo, los entrenamientos de la categoría master tendrán un nuevo horario. Las sesiones serán los lunes y miércoles de 19:00 a 21:00 en el Parque San Martín.',
         excerpt: 'Cambio de horarios para categoría master',
         category: 'anuncio',
-        tags: ['horarios', 'master', 'entrenamiento'],
+        tags: ['Horarios', 'Master', 'Entrenamiento'],
         author: admin._id,
         isPublished: true,
         views: 28
