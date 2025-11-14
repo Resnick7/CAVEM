@@ -5,6 +5,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
+
 import connectDB from './config/database.js';
 import { typeDefs } from './graphql/typeDefs/index.js';
 import { resolvers } from './graphql/resolvers/index.js';
@@ -13,32 +15,58 @@ import { uploadPDF, getFileUrl } from './utils/fileUpload.js';
 
 dotenv.config();
 
+// Necesario para usar __dirname en ES Modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Crear app
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-// Conectar a MongoDB
+// Conectar a DB
 connectDB();
 
-// Middleware
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// CORS
 app.use(cors({
   origin: [
-    'http://localhost:5173', // Vite dev server
-    'http://localhost:3000', // React Router dev server
-    'http://localhost:4173', // Vite preview
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'http://localhost:4173'
   ],
   credentials: true
 }));
 
-// Servir archivos estáticos (PDFs)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Servir archivos estáticos
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
-// Ruta para subir PDFs (fuera de GraphQL)
+/* -------------------------------------------------
+   📥 RUTA DE DESCARGA DE PDFs
+--------------------------------------------------- */
+app.get('/download-pdf/:filename', (req, res) => {
+  try {
+    const { filename } = req.params;
+    const filePath = path.join(__dirname, '../uploads/results', filename);
+
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ error: 'Archivo no encontrado' });
+    }
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+
+    return res.download(filePath);
+  } catch (error) {
+    console.error("Error al descargar archivo:", error);
+    res.status(500).json({ error: 'Error al descargar el archivo' });
+  }
+});
+
+/* -------------------------------------------------
+   📤 RUTA DE SUBIDA DE PDFs
+--------------------------------------------------- */
 app.post('/upload-pdf', uploadPDF.single('pdf'), (req, res) => {
   try {
     if (!req.file) {
@@ -63,16 +91,20 @@ app.post('/upload-pdf', uploadPDF.single('pdf'), (req, res) => {
   }
 });
 
-// Ruta de health check
+/* -------------------------------------------------
+   ❤️ HEALTH CHECK
+--------------------------------------------------- */
 app.get('/health', (req, res) => {
-  res.json({ 
-    status: 'OK', 
+  res.json({
+    status: 'OK',
     message: 'CAVEM Backend está funcionando',
     timestamp: new Date().toISOString()
   });
 });
 
-// Configurar Apollo Server
+/* -------------------------------------------------
+   🚀 APOLLO SERVER
+--------------------------------------------------- */
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -86,7 +118,6 @@ const server = new ApolloServer({
   }
 });
 
-// Iniciar el servidor
 async function startServer() {
   await server.start();
 
