@@ -4,6 +4,7 @@ import User from './src/models/User.js';
 import News from './src/models/News.js';
 import Tournament from './src/models/Tournament.js';
 import Teacher from './src/models/Teacher.js';
+import TournamentResult from './src/models/TournamentResult.js';
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ const seedData = async () => {
     await News.deleteMany({});
     await Tournament.deleteMany({});
     await Teacher.deleteMany({});
+    await TournamentResult.deleteMany({});
 
     // Crear usuario administrador
     console.log('👤 Creando usuario administrador...');
@@ -37,6 +39,7 @@ const seedData = async () => {
         lastName: 'Contrera',
         email: 'necontrera@cavem.com',
         phone: '+54 261 123-4567',
+        photoUrl: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=400&h=400&fit=crop',
         bio: 'Entrenadora con experiencia en lanzamientos y vallas.',
         specialties: ['Velocidad', 'Saltos', 'Vallas', 'Jabalina', 'Bala', 'Martillo'],
         experience: 20,
@@ -73,6 +76,7 @@ const seedData = async () => {
         lastName: 'Rojas',
         email: 'mrojas@cavem.com',
         phone: '+54 261 234-5678',
+        photoUrl: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop',
         bio: 'Entrenadora especializada en preparación infantil.',
         specialties: ['Fondo', 'Medio fondo', 'Maratón', 'Pista', 'Campo'],
         experience: 15,
@@ -109,6 +113,7 @@ const seedData = async () => {
         lastName: 'Pscitelli',
         email: 'mpscitelli@cavem.com',
         phone: '+54 261 345-6789',
+        photoUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop',
         bio: 'Especialista en saltos y gimnasio.',
         specialties: ['Largo', 'Alto', 'Triple', 'Garrocha'],
         experience: 18,
